@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Movie Guide</title>
+    <link href="https://fonts.googleapis.com/css?family=Avenir" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="app.js"></script>
+    <!-- <link rel="icon" href="URL"> -->
+</head>
+
+<body>
+
+    <div class="home-container">
+
+        <nav>
+            <ul>
+                <!-- <button id="logo" onclick="window.location.href='home.html'"><img src="images/logo 2.png"></button> -->
+                <li><span onclick="window.location.href='home.html'" data-href="home.html" id="home">MovieHub</span></li>
+                <li><span data-href="movies.html">movies</span></li>
+                <li><span data-href="tv-shows.html">tv shows</span></li>
+                <li><span data-href="recently-added.html">recently added</span></li>
+                <li><span data-href="watchlist.html">watchlist</span></li>
+                <!-- <form>
+                    <input name="search" id="search" onsubmit="getData" placeholder="Search" onkeydown="if(event.keyCode==13) { loadSearch(); return false; }">
+                </form> -->
+            </ul>
+            <div class="nav-right-side">
+                <div id="search-button" onclick="window.location.href='search.html'"><i class="fa fa-search"></i></div>
+                <img id="pfp" src="images/pfp default.png">
+            </div>
+        </nav>
+        
+        <div class="slideshow-container">
+            <div class="left-arrow-container">
+                <div class="left-arrow-circle">
+                    <button id="left-arrow" onclick="changeSlideshow(-1)"></button>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="slideshow-text-container">
+                    <div id="h-title"></div>
+                    <div class="subtitle">
+                        <div id="h-year"></div>
+                        <div id="h-seasons-runtime"></div>
+                        <div id="h-rating"></div>
+                        <div id="h-rated"></div>
+                    </div>
+                    <div id="h-plot"></div>
+                    <div id="h-cast"></div>
+                    <div id="h-genre"></div>
+                    <div class="buttons-container">
+                        <a id="watch-button" href="#"><span>Watch</span></a>
+                        <button id="watchlist-button">More Info</button>
+                    </div>
+                </div>
+                <div class="slideshow">
+                    <div class="slideshow-img-container">
+                        <img id="slideshow-img" onload="slideshowUpdate()">
+                    </div>
+                    <div class="fade-container">
+                        <div class="fade"></div>
+                        <div class="empty-fade"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-arrow-container">
+                <div class="right-arrow-circle">
+                    <button id="right-arrow" onclick="changeSlideshow(1)"></button>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="trending-container">
+            <label id="trending-title">TRENDING</label>
+            <div class="trending-row" >
+                <div class="trending-object" id="trending-1">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-2">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-3">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-4">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-5">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-6">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-7">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-8">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-9">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-10">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-11">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-12">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-13">
+                    <img>
+                </div>
+                <div class="trending-object" id="trending-14">
+                    <img>
+                </div>
+            </div>
+            <div class="trending-right-arrow-container">
+                <div class="trending-right-arrow-circle">
+                    <button id="trending-right-arrow" onclick="changeTrending(100)"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    window.onload = function load () {
+        homeLoad();
+    }
+
+</script>
+
+</html>

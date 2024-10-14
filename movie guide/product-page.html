@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Movie Guide</title>
+    <link href="https://fonts.googleapis.com/css?family=Avenir" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="app.js"></script>
+    <!-- <link rel="icon" href="URL"> -->
+</head>
+
+<body>
+
+    <div class="product-page-container">
+
+        <nav>
+            <ul>
+                <!-- <button id="logo" onclick="window.location.href='home.html'"><img src="images/logo 2.png"></button> -->
+                <li><span onclick="window.location.href='home.html'" data-href="home.html" id="home">MovieHub</span></li>
+                <li><span data-href="movies.html">movies</span></li>
+                <li><span data-href="tv-shows.html">tv shows</span></li>
+                <li><span data-href="recently-added.html">recently added</span></li>
+                <li><span data-href="watchlist.html">watchlist</span></li>
+                <!-- <form>
+                    <input name="search" id="search" onsubmit="getData" placeholder="Search" onkeydown="if(event.keyCode==13) { loadSearch(); return false; }">
+                </form> -->
+            </ul>
+            <div class="nav-right-side">
+                <div id="search-button" onclick="window.location.href='search.html'"><i class="fa fa-search"></i></div>
+                <img id="pfp" src="images/pfp default.png">
+            </div>
+        </nav>
+
+        <div class="god-container">
+
+            <div class="status-bar-container">
+                <div class="ghost-bar"></div>
+                <div class="status-bar"></div>
+            </div>
+
+            <div class="product-container">
+
+                <div class="poster-container">
+                    <img id="poster">
+                </div>
+                
+                <div id="vertical-line"></div>
+                
+                <div class="info-container-container">
+
+                    <div class="info-container-1">
+                        <table>
+                            <tr>
+                                <td>Title: </th>
+                                <td id="title"></th>
+                            </tr>
+                            <tr>
+                                <td>Plot: </th>
+                                <td id="plot"></th>
+                            </tr>
+                            <tr>
+                                <td>Year: </th>
+                                <td id="year"></th>
+                            </tr>
+                            <tr>
+                                <td>Director: </th>
+                                <td id="director"></th>
+                            </tr>
+                            <tr>
+                                <td>Streaming: </th>
+                                <td id="streaming"></th>
+                            </tr>
+                            <tr>
+                                <td>Genre: </th>
+                                <td id="genre"></th>
+                            </tr>
+                            <tr>
+                                <td>IMDb: </th>
+                                <td id="ratings-imdb"></th>
+                            </tr>
+                            <tr>
+                                <td>Rotten Tomatoes: </th>
+                                <td id="ratings-rt"></th>
+                            </tr>
+                            <tr>
+                                <td>Metacritic: </th>
+                                <td id="ratings-mc"></th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="info-container-2">
+                        <table>
+                            <tr>
+                                <td>Rated: </th>
+                                <td id="rated"></th>
+                            </tr>
+                            <tr>
+                                <td>Runtime: </th>
+                                <td id="runtime"></th>
+                            </tr>
+                            <tr>
+                                <td>Released: </th>
+                                <td id="released"></th>
+                            </tr>
+                            <tr>
+                                <td>Awards: </th>
+                                <td id="awards"></th>
+                            </tr>
+                            <tr>
+                                <td>Language: </th>
+                                <td id="language"></th>
+                            </tr>
+                            <tr>
+                                <td>Writer: </th>
+                                <td id="writer"></th>
+                            </tr>
+                            <tr>
+                                <td>Country: </th>
+                                <td id="country"></th>
+                            </tr>
+                            <tr>
+                                <td id="misc title">Box Office: </th>
+                                <td id="misc"></th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="info-container-3">
+                        <table>
+                            <tr>
+                                <td>Netflix: </th>
+                                <td id="netflix"></th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="info-container-4">
+                        <label id="summary"></label>
+                    </div>
+                    
+                    <div class="dots-container">
+                        <div class="single-dot-container" onclick="infoData1()">
+                            <div class="dot" id="dot-1"></div>
+                        </div>
+                        <div class="single-dot-container" onclick="infoData2()">
+                            <div class="dot" id="dot-2"></div>
+                        </div>
+                        <div class="single-dot-container" onclick="infoData3()">
+                            <div class="dot" id="dot-3"></div>
+                        </div>
+                        <div class="single-dot-container" onclick="infoData4()">
+                            <div class="dot" id="dot-4"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            
+            <div class="graph-container">
+                <script src="https://cdn.plot.ly/plotly-2.20.0.min.js" charset="utf-8"></script>
+                <div id="canvas" style="width:1200px; height:800px;"></div>
+            </div>
+
+            <div class="watch-container">
+                
+            </div>
+
+        </div>
+    
+    </div>
+
+</body>
+
+<script>
+    window.onload = function load () {
+        infoData1();
+        grapher(); // WARN: this is an async function; it might not be ready when the page loads
+    }
+
+    window.addEventListener('beforeunload', function (event) {
+        localStorage.removeItem('streamingVar');
+    });
+
+</script>
+
+</html>

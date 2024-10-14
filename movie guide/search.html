@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Movie Guide</title>
+    <link href="https://fonts.googleapis.com/css?family=Avenir" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="app.js"></script>
+    <!-- <link rel="icon" href="URL"> -->
+</head>
+
+<body>
+    
+    <div class="search-container">
+
+        <nav>
+            <ul>
+                <!-- <button id="logo" onclick="window.location.href='home.html'"><img src="images/logo 2.png"></button> -->
+                <li><span onclick="window.location.href='home.html'" data-href="home.html" id="home">MovieHub</span></li>
+                <li><span data-href="movies.html">movies</span></li>
+                <li><span data-href="tv-shows.html">tv shows</span></li>
+                <li><span data-href="recently-added.html">recently added</span></li>
+                <li><span data-href="watchlist.html">watchlist</span></li>
+                <!-- <form>
+                    <input name="search" id="search" onsubmit="getData" placeholder="Search" onkeydown="if(event.keyCode==13) { loadSearch(); return false; }">
+                </form> -->
+            </ul>
+            <div class="nav-right-side">
+                <div id="search-button" onclick="window.location.href='search.html'"><i class="fa fa-search"></i></div>
+                <img id="pfp" src="images/pfp default.png">
+            </div>
+        </nav>
+
+        <div class="search-bar-container">
+            <input id="search-bar" type="text" placeholder="Search by title" onsubmit="loadSearch()" onkeydown="if(event.keyCode==13) { loadSearch(); return false; }"">
+            <button id="clear-search-button" onclick="clearSearch()">✕</button>
+        </div>
+
+        <div class="results-container">
+
+            <div onclick=productPage(0) class="result">
+                <div class="img-container">
+                    <img id="result1-img" onerror="this.style.display='none';">
+                </div>
+                <div id="vertical-line"></div>
+                <table>
+                    <tr>
+                        <td>Title: </th>
+                            <td id="result1-title"></th>
+                            </tr>
+                            <tr>
+                                <td>Type: </th>
+                                    <td id="result1-type"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>Year: </th>
+                        <td id="result1-year"></th>
+                    </tr>
+                </table>
+            </div>
+            
+            <div onclick=productPage(1) class="result">
+                <div class="img-container">
+                    <img id="result2-img" onerror="this.style.display='none';">
+                </div>
+                <div id="vertical-line"></div>
+                <table>
+                    <tr>
+                        <td>Title: </th>
+                        <td id="result2-title"></th>
+                        </tr>
+                    <tr>
+                        <td>Type: </th>
+                        <td id="result2-type"></th>
+                    </tr>
+                    <tr>
+                        <td>Year: </th>
+                        <td id="result2-year"></th>
+                    </tr>
+                </table>
+            </div>
+            
+            <div onclick=productPage(2) class="result">
+                <div class="img-container">
+                    <img id="result3-img" onerror="this.style.display='none';">
+                </div>
+                <div id="vertical-line"></div>
+                <table>
+                    <tr>
+                        <td>Title: </th>
+                        <td id="result3-title"></th>
+                        </tr>
+                    <tr>
+                        <td>Type: </th>
+                        <td id="result3-type"></th>
+                    </tr>
+                    <tr>
+                        <td>Year: </th>
+                        <td id="result3-year"></th>
+                    </tr>
+                </table>
+            </div>
+            
+            <div onclick=productPage(3) class="result">
+                <div class="img-container">
+                    <img id="result4-img" onerror="this.style.display='none';">
+                </div>
+                <div id="vertical-line"></div>
+                <table>
+                    <tr>
+                        <td>Title: </th>
+                        <td id="result4-title"></th>
+                        </tr>
+                    <tr>
+                        <td>Type: </th>
+                        <td id="result4-type"></th>
+                    </tr>
+                    <tr>
+                        <td>Year: </th>
+                        <td id="result4-year"></th>
+                    </tr>
+                </table>
+            </div>
+            
+            <div onclick=productPage(4) class="result">
+                <div class="img-container">
+                    <img id="result5-img" onerror="this.style.display='none';">
+                </div>
+                <div id="vertical-line"></div>
+                <table>
+                    <tr>
+                        <td>Title: </th>
+                        <td id="result5-title"></th>
+                        </tr>
+                    <tr>
+                        <td>Type: </th>
+                        <td id="result5-type"></th>
+                    </tr>
+                    <tr>
+                        <td>Year: </th>
+                        <td id="result5-year"></th>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+    
+</body>
+</html>
+
+<script>
+    window.onload = function load () {
+        getSearchResults();
+    }
+</script>

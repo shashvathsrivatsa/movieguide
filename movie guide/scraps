@@ -1,0 +1,143 @@
+
+// grapher prior to making it async
+function grapher () {
+    const title = localStorage.getItem('title');
+
+    fetch('https://api.themoviedb.org/3/search/tv?api_key=c4af9fa1b544f4c1176b81cd09f45ac0&query=' + title)
+    .then(response => response.json())
+    .then(response => {
+        const tmdbID = response.results[0].id
+        
+        fetch('https://api.themoviedb.org/3/tv/' + tmdbID + '?api_key=c4af9fa1b544f4c1176b81cd09f45ac0')
+        .then(response2 => response2.json())
+        .then(response2 => {
+            const seasons = response2.number_of_seasons;
+            let episodeInfo = {};
+            
+            let votesX = [];
+            let votesY = [];
+
+            let votesData = {};
+
+            let fetchPromises = [];
+
+            for (let i = 1; i < seasons + 1; i++) {
+                try {
+                    const fetchPromise = fetch('https://api.themoviedb.org/3/tv/' + tmdbID + '/season/' + i + '?api_key=c4af9fa1b544f4c1176b81cd09f45ac0')
+                        .then(response => response.json())
+                        .then(response => {
+                            console.log(response);
+                            let episodes = response.episodes;
+                            episodes.forEach(item => {
+                                if (item.vote_count !== 0) {
+                                    const key = 'S' + i + ' E' + item.episode_number;
+                                    votesX.push(key);
+                                    const value = item.vote_average;
+                                    votesY.push(value);
+        
+                                    // console.log(item)
+                                    const episodeData = { episodeName: item.name, guestStars: guestStarsMap(item.guest_stars), airDate: item.air_date, voteAverage: item.vote_average, numVotes: item.vote_count };
+                                    episodeInfo[key] = episodeData;
+                                }
+                            });
+                        });
+
+                    fetchPromises.push(fetchPromise);
+
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
+
+            Promise.all(fetchPromises)
+            .then(() => {
+                
+                console.log(votesX);
+                console.log(votesY);
+
+                if (i === seasons || true) {                        
+                    canvas = document.getElementById('canvas');
+
+                    // range
+                    // const min = Math.min(...votesY);
+                    // const max = Math.max(...votesY);
+
+                    // const lowerBound = Math.ceil(min) - 1;
+                    // const upperBound = Math.floor(max) + 1;
+
+                    const lowerBound = 0;
+                    const upperBound = 10;
+
+                    // PLOTLY
+    
+                    let data = [{
+                        x: votesX,
+                        y: votesY,
+                        line: {
+                            color: '#FC121A'
+                        },
+                        fill: 'tonexty',
+                        fillcolor: {
+                            type: 'linear',
+                            colorstops: [
+                            [0, '#0066cc'],
+                            [1, '#ffffff']
+                            ]
+                        },
+                        hovertemplate:
+                            "<b>%{text}</b><br>" +
+                            "<extra></extra>",
+                        text: votesX.map(episode => {
+                            let info = episodeInfo[episode];
+                            return `${episode}<br>Title: ${info.episodeName}<br>Vote Average: ${info.voteAverage}<br><br>Guest Stars: ${info.guestStars}<br>Num of Votes: ${info.numVotes}<br>Air Date: ${info.airDate}`;
+                        })
+                    }]
+    
+                    var layout = {
+                        font: {
+                            color: '#fff',
+                            family: 'Avenir'
+                        },
+                        title: 'Episode Ratings',
+                        plot_bgcolor: 'rgba(0, 0, 0, 0)',
+                        paper_bgcolor: 'rgba(0, 0, 0, 0)',
+                        xaxis: {
+                            title: {
+                                text: 'Episode',
+                                standoff: 35
+                            },
+                            color: '#ccc',
+                            showgrid: false,
+                            showline: true,
+                            zeroline: true
+                        },
+                        yaxis: {
+                            title: 'Rating',
+                            color: '#ccc',
+                            showgrid: false,
+                            showline: true,
+                            range: [lowerBound, upperBound]
+                        },
+                        dragmode: 'pan',
+                        hovermode: 'x'
+                    };
+    
+                    config = {
+                        displaylogo: false,
+                        displayModeBar: false,
+                        scrollZoom: true
+                    }
+
+                    Plotly.newPlot(canvas, data, layout, config);
+                }
+
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+
+            
+        })
+    })
+
+}
